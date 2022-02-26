@@ -3,6 +3,11 @@ Hive playground with Plural Sight.
 
 # Basic commands
 
+Initialize metastore.db for the first time with
+```
+schematool -initSchema -dbType derby
+```
+
 Connecting locally
 ```bash
 beeline -u jdbc:hive2://
@@ -28,6 +33,8 @@ beeline -u jdbc:hive2:// -e "use pluralsight; select * from customers"
 			
 Running from hql file:
 ```bash
-beeline -u jdbc:hive2:// -f <file>.hql
+beeline -u jdbc:hive2:// -f hql/00-demo.hql
+beeline -u jdbc:hive2:// -f hql/01-demo.hql
+beeline -u jdbc:hive2:// -f hql/02-demo.hql
 ```
 
