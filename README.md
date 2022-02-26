@@ -93,7 +93,55 @@ beeline -u jdbc:hive2:// -f hql/05-demo.hql
 ```
 
 ## Temporary Tables
-Review [06-demo.hql](hql/06-demo.hql) for content
+[06-demo.hql](hql/06-demo.hql)
 ```bash
 beeline -u jdbc:hive2:// -f hql/06-demo.hql 
 ```
+
+## Loading Data into Tables
+External file: [freshproducts.csv](data/freshproducts.csv)
+### File from local file system
+[07a-demo.hql](hql/07a-demo.hql)
+```bash
+beeline -u jdbc:hive2:// -f hql/07a-demo.hql 
+```
+
+Viewing hive warehouse a fresh copy is stored
+```bash
+# show files in warehouse
+hadoop fs -ls /user/hive/warehouse/pluralsight.db/freshproducts
+# notice file is an exact copy of local file
+hadoop fs -cat /user/hive/warehouse/pluralsight.db/freshproducts/freshproducts.csv
+```
+
+### File from HDFS
+```bash
+# copy file onto HDFS
+hadoop fs -copyFromLocal data/freshproducts.csv /data/
+# confirm
+hadoop fs -ls /data/
+```
+
+[07b-demo.hql](hql/07b-demo.hql)
+```bash
+# run 
+beeline -u jdbc:hive2:// -f hql/07b-demo.hql 
+```
+
+```bash
+# observe that loaded file shows up under HDFS as another copy
+hadoop fs -ls /user/hive/warehouse/pluralsight.db/freshproducts/
+# observe that the file have moved from data to warehouse directory
+hadoop fs -ls /data/
+```
+
+### From another Table
+
+[07c-demo.hql](hql/07c-demo.hql)
+
+```bash
+# run
+beeline -u jdbc:hive2:// -f hql/07c-demo.hql 
+```
+
+# Multi-table Insert and Deleting
