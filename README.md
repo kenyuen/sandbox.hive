@@ -82,7 +82,7 @@ hadoop fs -copyFromLocal -f data/products.csv /data/
 hadoop fs -ls /data/
 ```
 
-Load data into Hive with [04-demo.hql](hql/04-demo.sql)
+Load data into Hive with [04-demo.hql](hql/04-demo.hql)
 ```bash
 beeline -u jdbc:hive2:// -f hql/04-demo.sql 
 ```
@@ -93,7 +93,7 @@ beeline -u jdbc:hive2:// -f hql/05-demo.hql
 ```
 
 ## Temporary Tables
-Review [06-demo.hql](hql/06-demo.sql) for content
+Review [06-demo.hql](hql/06-demo.hql) for content
 ```bash
 beeline -u jdbc:hive2:// -f hql/06-demo.hql 
 ```
