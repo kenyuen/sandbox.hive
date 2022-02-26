@@ -1,7 +1,23 @@
 # sandbox.hive
-Hive playground with Plural Sight.
+Hive playground with [Plural Sight](https://app.pluralsight.com/library/courses/hive-relational-database-developers-getting-started/transcript) following along with Janani Ravi.
 
-# Basic commands
+# Playground scripts
+
+## Preparations
+Preparing Hadoop
+```bash
+# Ensure Hadoop is running: 
+#       NodeManager, ResourceManager, NameNode, SecondaryNameNode, Data Node
+jps
+# Prepare hadoop directories
+hadoop fs -mkdir /tmp
+hadoop fs -mkdir /user
+hadoop fs -mkdir /user/hive
+hadoop fs -mkdir /user/hive/warehouse
+# permissions
+hadoop fs -chmod g+w /tmp
+hadoop fs -chmod g+w /user/hive/warehouse
+```
 
 Initialize metastore.db for the first time with
 ```
@@ -25,16 +41,59 @@ If "No current connection"
 # local connect
 !connect jdbc:hive2://
 ```
-
+## Creating Pluralsight DB and Tables
 One time executions from command line:
 ```bash
 beeline -u jdbc:hive2:// -e "use pluralsight; select * from customers"
 ```
 			
-Running from hql file:
+Running from hql files:
+* [00-demo.hql](hql/00-demo.hql)
+* [01-demo.hql](hql/01-demo.hql)
+* [02-demo.hql](hql/02-demo.hql)
+* [03-demo.hql](hql/03-demo.hql)
 ```bash
-beeline -u jdbc:hive2:// -f hql/00-demo.hql
-beeline -u jdbc:hive2:// -f hql/01-demo.hql
-beeline -u jdbc:hive2:// -f hql/02-demo.hql
+beeline -u jdbc:hive2:// -f hql/00-demo.hql 
+beeline -u jdbc:hive2:// -f hql/01-demo.hql 
+beeline -u jdbc:hive2:// -f hql/02-demo.hql 
+beeline -u jdbc:hive2:// -f hql/03-demo.hql 
+```
+Exploring the warehouse directories with hadoop fs
+```bash
+# shows the db stored in HDFS
+hadoop fs -ls /user/hive/warehouse
+# shows the tables in HDFS
+hadoop fs -ls /user/hive/warehouse/pluralsight.db
+# shows files of the tables
+hadoop fs -ls /user/hive/warehouse/pluralsight.db/customers
+# Content of the stored file - in this case the first insert into customer
+hadoop fs -cat /user/hive/warehouse/pluralsight.db/customers/000000_0
+# Content of the second insert
+hadoop fs -cat /user/hive/warehouse/pluralsight.db/customers/000000_0_copy_1
+```
+## External Tables
+Preparing data in HDFS
+```bash
+# creating the data directory
+hadoop fs -mkdir /data
+# copy the data file to HDFS data directory
+hadoop fs -copyFromLocal -f data/products.csv /data/
+# confirm file copied
+hadoop fs -ls /data/
 ```
 
+Load data into Hive with [04-demo.hql](hql/04-demo.sql)
+```bash
+beeline -u jdbc:hive2:// -f hql/04-demo.sql 
+```
+## Altering Tables
+Review [05-demo.hql](hql/05-demo.hql) for content
+```bash
+beeline -u jdbc:hive2:// -f hql/05-demo.hql 
+```
+
+## Temporary Tables
+Review [06-demo.hql](hql/06-demo.sql) for content
+```bash
+beeline -u jdbc:hive2:// -f hql/06-demo.hql 
+```
