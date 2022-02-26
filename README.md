@@ -1,0 +1,2 @@
+# sandbox.hive
+Hive playground
