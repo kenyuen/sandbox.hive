@@ -1,11 +1,15 @@
 use pluralsight;
 
 create table if not exists customers ( 
-    id biginit, 
-    name string, 
+    id bigint,
+    name string,
     address string 
     );
 
+-- clear from previous runs
+truncate table customers;
+
+-- load
 insert into customers values ( 1111, "John", "WA");
 insert into customers values ( 
     2222, "Emily", "WA"

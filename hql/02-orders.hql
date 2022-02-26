@@ -8,6 +8,10 @@ create table if not exists orders (
 	amount double
 	);
 
+-- clear from previous runs
+truncate table orders;
+
+-- load
 insert into orders values (
  	1111111, " phone", 1111, 3, 1200
 	), (
@@ -19,3 +23,8 @@ insert into orders values (
 	), (
 	1111115, " t-shirt", 4444,2,66
 	);
+
+-- join between tables
+select customers.id, name, product_id 
+from customers join orders 
+where customers.id = orders.customer_id;

@@ -28,6 +28,7 @@ beeline -u jdbc:hive2:// -e "use pluralsight; select * from customers"
 			
 Running from hql file:
 ```bash
-beeline -u jdbc:hive2:// -f <file>.hql
+beeline -u jdbc:hive2:// -f hql/01-customers.hql
+beeline -u jdbc:hive2:// -f hql/02-orders.hql
 ```
 
