@@ -53,13 +53,13 @@ from ads
 lateral view explode(ad_list) adListTable as ad_id;
 
 -- how many times where ads occured
---   Hmmm... this took long, never completed
---   commented out for now.
+--   This took awhile, never returned.
+--   Had to disable CBO and restart hadoop.
 
--- select ad_id, count(*)
--- from ads
--- lateral view explode(ad_list) adListTable as ad_id
--- group by ad_id;
+select ad_id, count(*)
+from ads
+lateral view explode(ad_list) adListTable as ad_id
+group by ad_id;
 
 -- multiple lateral views
 create table if not exists student_subjects (
@@ -93,18 +93,18 @@ create table if not exists example (
 );
 
 
--- note, this timeoud out, even with CBO set to false
--- insert into table example
--- select array(
---     array(1,2,3),
---     array(4,5,6),
---     array(6,7,8)
--- );
+-- note, this timeout out - disabled CBO and restarted Hadoop for it to work
+insert into table example
+select array(
+    array(1,2,3),
+    array(4,5,6),
+    array(6,7,8)
+);
 
--- select * from example
--- lateral view explode(double_nested) nestedTable as single_nested
--- lateral view explode(single_nested) flatTable as num;
+select * from example
+lateral view explode(double_nested) nestedTable as single_nested
+lateral view explode(single_nested) flatTable as num;
 
--- select num from example
--- lateral view explode(double_nested) nestedTable as single_nested
--- lateral view explode(single_nested) flatTable as num;
+select num from example
+lateral view explode(double_nested) nestedTable as single_nested
+lateral view explode(single_nested) flatTable as num;
