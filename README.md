@@ -1,4 +1,6 @@
+
 # sandbox.hive
+
 Hive playground with [Plural Sight](https://app.pluralsight.com/library/courses/hive-relational-database-developers-getting-started/transcript) following along with Janani Ravi.
 
 Playground notes during the course.
@@ -187,6 +189,41 @@ beeline -u jdbc:hive2:// -f hql/07c-demo.hql
 # run
 beeline -u jdbc:hive2:// -f hql/08-demo.hql 
 ```
+# Data Types
+## Arrays
+[09a-demo.hql](hql/09a-demo.hql)
+
+```bash
+# run
+beeline -u jdbc:hive2:// -f hql/09a-demo.hql
+```
+## Maps
+[09b-demo.hql](hql/09b-demo.hql)
+
+```bash
+beeline -u jdbc:hive2:// -f hql/09b-demo.hql
+```
+## Struct
+[09c-demo.hql](hql/09c-demo.hql)
+
+```bash
+beeline -u jdbc:hive2:// -f hql/09c-demo.hql
+```
+## Table Functions and Lateral Views
+[09d-demo.hql](hql/09d-demo.hql)
+
+```bash
+beeline -u jdbc:hive2:// -f hql/09d-demo.hql
+```
+
+# Subqueries and Views
+[10a-demo.hql](hql/10a-demo.hql)
+
+```bash
+beeline -u jdbc:hive2:// -f hql/10a-demo.hql
+```
+
+
 # Cleanup
 ```bash
 # shutdown hadoop
